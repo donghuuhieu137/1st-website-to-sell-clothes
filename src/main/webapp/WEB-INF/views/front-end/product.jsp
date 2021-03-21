@@ -60,7 +60,7 @@
 											<div class="select-swap">
 												<c:forEach items="${product.color}" var="color">
 													<div class="n-sd swatch-element color">
-														<input class="variant-0" type="radio" name="color" value="${color.id}" id="${color.code}">
+														<input class="variant-0" type="radio" name="color" value="${color.name}" id="${color.code}">
 														<label for="${color.code}" class="${color.code}">
 															<span>${color.name}</span>
 														</label>
@@ -73,7 +73,7 @@
 											<div class="select-swap">  
 												<c:forEach items="${product.size}" var="size">
 													<div class="n-sd swatch-element size">
-														<input class="variant-1" type="radio" name="size" value="${size.id}" id="${size.code}" >
+														<input class="variant-1" type="radio" name="size" value="${size.name}" id="${size.code}" >
 														<label for="${size.code}">
 															<span>${size.name}</span>
 														</label>
@@ -89,7 +89,7 @@
 											<input type="button" value="+" onclick="plusQuantity()" class="qty-btn">
 										</div>
 										<div class="wrap-addcart clearfix">						
-											<button type="button" id="add-to-cart" class="add-to-cartProduct button dark btn-addtocart addtocart-modal" onclick="product.addToCart(${product.id},1)" name="add">Thêm vào giỏ</button>
+											<button type="button" id="add-to-cart" class="add-to-cartProduct button dark btn-addtocart addtocart-modal" onclick="product.addToCart( ${product.id}, $('#quantity').val(), $('input[name=color]:checked').val(), $('input[name=size]:checked').val() )" name="add">Thêm vào giỏ</button>
 
 											<button class="clickcart" id="buy-now">Mua ngay</button>
 

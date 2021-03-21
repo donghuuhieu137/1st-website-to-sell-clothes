@@ -13,14 +13,28 @@ public class SaleOrderProducts extends BaseEntity {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
-	private Product product;
+	private Product productId;
 	
 	@Column(name = "quality")
 	private Integer quality;
+	
+	@Column(name = "size")
+	private String size;
+	
+	@Column(name = "color")
+	private String color;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "saleorder_id")
 	private SaleOrder saleOrder;
+
+	public Product getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Product productId) {
+		this.productId = productId;
+	}
 
 	public SaleOrder getSaleOrder() {
 		return saleOrder;
@@ -28,14 +42,6 @@ public class SaleOrderProducts extends BaseEntity {
 
 	public void setSaleOrder(SaleOrder saleOrder) {
 		this.saleOrder = saleOrder;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 	public Integer getQuality() {
@@ -46,4 +52,22 @@ public class SaleOrderProducts extends BaseEntity {
 		this.quality = quality;
 	}
 
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	
+	
 }

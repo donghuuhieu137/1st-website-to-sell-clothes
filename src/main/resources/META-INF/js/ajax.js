@@ -16,18 +16,20 @@ var product = {
 						// location.reload();
 						$("#colProductStatus-"+productId).html("<span class=\"badge badge-danger\">Đã xoá</span>");
 					} else {
-						alert('loi');
+						alert("eror");
 					}
 				},
 				error: function (jqXhr, textStatus, errorMessage) { // error callback 
 			        
 			    }
 			});
-		}
+		},
 		
-		/*addToCart: function(productId, quantity){
+		addToCart: function(productId, quantity, color, size){
 			var data = {};
-			data["productId"] = id;
+			data["id"] = productId;
+			data["color"] = color;
+			data["size"] = size;
 			data["quantity"] = quantity;
 			
 			$.ajax({
@@ -40,12 +42,36 @@ var product = {
 					if(jsonResult.status == 200){
 						$("#cart-product-quantity").html(jsonResult.data);
 					} else{
-						alert('eror');
+						alert("eror");
 					}
 				},
 				error: function (jqXhr, textStatus, errorMessage) { // error callback 
 				
 			    }
 			});
-		}*/
+		},
+		
+		removeFromCart: function(productId){
+			var data = {};
+			data["id"] = productId;
+			
+			$.ajax({
+				url: "/remove-from-cart",
+				type: "post",
+				contentType:"application/json",
+				data: JSON.stringify(data),
+				dataType: "json",
+				success: function(jsonResult){
+					if(jsonResult.status == 200){
+						$("#cart-product-quantity").html(jsonResult.data);
+						$("#cart-product"+productId).remove();
+					} else{
+						alert("eror");
+					}
+				},
+				error: function (jqXhr, textStatus, errorMessage) { // error callback 
+				
+			    }
+			});
+		}
 }

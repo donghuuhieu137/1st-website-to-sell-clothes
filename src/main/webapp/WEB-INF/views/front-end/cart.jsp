@@ -1,7 +1,7 @@
 <!-- sử dụng tiếng việt -->
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,44 +24,46 @@
 				<span>Giỏ hàng</span>
 			</div>
 			<div class="cart-product">
-				<div class="cart-product-detail">
-					<img src="images/cart-img/img1.jpg">
-					<div class="cart-product-info">
-						<span class="cart-product-detail-title">
-							HD43 - Áo Hoodie
-						</span>
-						<br>
-						<span>
-							169,000₫
-						</span>
-						<br>
-						<span>
-							TRẮNG/M
-						</span>
-						<br>
-						<span>
-							Số lượng 1
-						</span>
-						<span class="cart-product-info-sum">
-							338,000₫
-						</span>
+				<c:forEach items="${cart.cartProduct}" var="product">
+					<div class="cart-product-detail" id="cart-product-${product.id}">
+						<img src="${pageContext.request.contextPath}/uploads/${product.imgPath}">
+						<div class="cart-product-info">
+							<span class="cart-product-detail-title">
+								${product.name}
+							</span>
+							<br>
+							<span>
+								${product.price}₫
+							</span>
+							<br>
+							<span>
+								${product.color}/ ${product.size}
+							</span>
+							<br>
+							<span>
+								Số lượng: ${product.quality}
+							</span>
+							<span class="cart-product-info-sum">
+								${product.totalPrice}₫
+							</span>
+						</div>
+						<div class="cart-product-info2">
+							<button onclick="product.removeFromCart(${product.id})"><i class="fas fa-times"></i></button>
+						</div>
 					</div>
-					<div class="cart-product-info2">
-						<a href="#"><i class="fas fa-times"></i></a>
-					</div>
-				</div>
+				</c:forEach>
 				<div class="cart-product-pay">
 					<div class="col-sm-6 col-md-6 cart-product-note">
 						<form>
-							<input type="text" name="note" placeholder="Ghi chú">
+							<input type="text" name="note" placeholder="Ghi chú . . .">
 						</form>
 					</div>
 					<div class="col-sm-6 col-md-6">
 						<div class="cart-product-pay-total">
-							Tổng tiền: <span> 338,000₫</span>
+							Tổng tiền: <span> ${totalPriceInCart}₫</span>
 						</div>
 						<div>
-							<button>Thanh toán</button>
+							<a href="${pageContext.request.contextPath}/checkout"><button>Thanh toán</button></a>
 						</div>
 					</div>
 				</div>

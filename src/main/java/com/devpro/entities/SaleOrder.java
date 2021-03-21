@@ -1,6 +1,5 @@
 package com.devpro.entities;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +18,8 @@ public class SaleOrder extends BaseEntity {
 	@Column(name = "code")
 	private String code;
 
-	@Column(name = "total", precision = 13, scale = 2, nullable = false)
-	private BigDecimal total;
+	@Column(name = "total", nullable = false)
+	private Integer total;
 
 	@Column(name = "customer_name")
 	private String customerName;
@@ -38,14 +39,14 @@ public class SaleOrder extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "saleOrder", fetch = FetchType.EAGER)
 	private List<SaleOrderProducts> saleOrderProducts = new ArrayList<SaleOrderProducts>();
 	
-	public void addSaleOrderProducts(SaleOrderProducts _saleOrderProducts) {
-		_saleOrderProducts.setSaleOrder(this);
-		saleOrderProducts.add(_saleOrderProducts);
-	}
+//	public void addSaleOrderProducts(SaleOrderProducts _saleOrderProducts) {
+//		_saleOrderProducts.setSaleOrder(this);
+//		saleOrderProducts.add(_saleOrderProducts);
+//	}
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_id", referencedColumnName = "id")
-//	private User user;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 
 	public String getCode() {
 		return code;
@@ -55,12 +56,20 @@ public class SaleOrder extends BaseEntity {
 		this.code = code;
 	}
 
-	public BigDecimal getTotal() {
+	public Integer getTotal() {
 		return total;
 	}
 
-	public void setTotal(BigDecimal total) {
+	public void setTotal(Integer total) {
 		this.total = total;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getCustomerName() {
@@ -110,14 +119,4 @@ public class SaleOrder extends BaseEntity {
 	public void setCustomerEmail(String customerEmail) {
 		this.customerEmail = customerEmail;
 	}
-
-	
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-
 }

@@ -1,6 +1,5 @@
 package com.devpro.entities;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +25,9 @@ public class Product extends BaseEntity {
 
 	@Column(name = "code", nullable = false)
 	private String code;
-	
-	@Column(name = "price", precision = 13, scale = 2, nullable = false)
-	private BigDecimal price;
+
+	@Column(name = "price", nullable = false)
+	private Integer price;
 
 	@Column(name = "short_description", length = 3000, nullable = false)
 	private String shortDes;
@@ -44,24 +43,27 @@ public class Product extends BaseEntity {
 
 	@Column(name = "seo", nullable = false)
 	private String seo;
-	
+
 	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "tbl_products_size",
 			  joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "size_id"))
 	private Set<ProductSize> size = new HashSet<ProductSize>();
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product_img", fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<ProductImages> productImages = new ArrayList<ProductImages>();
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+	private List<SaleOrderProducts> saleOrderProducts = new ArrayList<SaleOrderProducts>();
+
 	public void addProductImages(ProductImages _productImages) {
 		_productImages.setProduct(this);
 		productImages.add(_productImages);
 	}
-	
+
 	public void removeProductImages(ProductImages _productImages) {
 		_productImages.setProduct(null);
 		productImages.remove(_productImages);
@@ -72,7 +74,7 @@ public class Product extends BaseEntity {
 			removeProductImages(productImages);
 		}
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -81,11 +83,11 @@ public class Product extends BaseEntity {
 		this.title = title;
 	}
 
-	public BigDecimal getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -97,7 +99,7 @@ public class Product extends BaseEntity {
 		this.shortDes = shortDes;
 	}
 
-	
+
 
 	public String getDetailDes() {
 		return detailDes;
@@ -154,4 +156,16 @@ public class Product extends BaseEntity {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+//	public List<SaleOrderProducts> getSaleOrderProducts() {
+//		return saleOrderProducts;
+//	}
+//
+//	public void setSaleOrderProducts(List<SaleOrderProducts> saleOrderProducts) {
+//		this.saleOrderProducts = saleOrderProducts;
+//	}
+
+
+
+
 }

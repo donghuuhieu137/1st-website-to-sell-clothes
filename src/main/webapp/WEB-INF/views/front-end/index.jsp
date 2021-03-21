@@ -20,7 +20,7 @@
 		<div class="main-body">
 			<!-- banner -->
 			<div class="banner">
-				<img src="images/saleBanner.jpg">
+				<img src="${pageContext.request.contextPath}/images/saleBanner.jpg">
 			</div>
 			<!-- /banner -->
 			<!-- slick slider -->

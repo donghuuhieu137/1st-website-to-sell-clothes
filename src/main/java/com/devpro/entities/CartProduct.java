@@ -1,12 +1,14 @@
 package com.devpro.entities;
 
-import java.math.BigDecimal;
-
 public class CartProduct {
 	private int id;
 	private String name;
-	private int quantity;
-	private BigDecimal price;
+	private int quality;
+	private Integer price;
+	private String color;
+	private String size;
+	private Integer totalPrice;
+	private String imgPath;
 	
 	public int getId() {
 		return id;
@@ -20,30 +22,42 @@ public class CartProduct {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getQuantity() {
-		return quantity;
+	
+	public int getQuality() {
+		return quality;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuality(int quality) {
+		this.quality = quality;
 	}
-	public BigDecimal getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public CartProduct(int id, String name, int quantity, BigDecimal price) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
+	public Integer getTotalPrice() {
+		return totalPrice;
 	}
-	public CartProduct() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
 	}
-	
-	
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	
 }
