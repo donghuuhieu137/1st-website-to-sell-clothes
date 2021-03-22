@@ -19,8 +19,9 @@ import com.itptit.model.CategorySearch;
 import com.itptit.model.ProductSearch;
 import com.itptit.services.CategoryService;
 import com.itptit.services.ProductsService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller	// -> tạo ra 1 bean tên webConf và được spring-container quản lí.
+@Controller// -> tạo ra 1 bean tên webConf và được spring-container quản lí.
 // -> báo module web mapping request cho controller này.
 
 public class CollectionsController extends BaseController {
