@@ -37,7 +37,7 @@
 						Category
 					</div>
 					<div class="add-product-detail">
-						<form:select class="form-control form-control-line" path="category.id">
+						<form:select class="form-control form-control-line" path="category">
 							<form:options items="${categories}" itemValue="id" itemLabel="name"/>
 						</form:select>
 					</div>

@@ -28,7 +28,7 @@
 														<div class="product-thumbnail-wrapper">
 															<img class="product-thumbnail-image" src="${pageContext.request.contextPath}/uploads/${product.imgPath}">
 														</div>
-														<span class="product-thumbnail-quantity" aria-hidden="true">${product.quality}</span>
+														<span class="product-thumbnail-quantity" aria-hidden="true">${product.quantity}</span>
 													</div>
 												</td>
 												<td class="product-description">
@@ -39,7 +39,7 @@
 													</span>
 	
 												</td>
-												<td class="product-quantity visually-hidden">${product.quality}</td>
+												<td class="product-quantity visually-hidden">${product.quantity}</td>
 												<td class="product-price">
 													<span class="order-summary-emphasis">${product.totalPrice}₫</span>
 												</td>
@@ -135,6 +135,7 @@
 								
 								<form:form action="${pageContext.request.contextPath}/checkout" method="post" modelAttribute="saleOrder">
 									<div class="section-content section-customer-information ">
+									<form:hidden path="id"/>
 										<div class="fieldset">
 											<div class="field field-required  ">
 												<div class="field-input-wrapper">
@@ -172,90 +173,22 @@
 											</div>
 										</div>
 									</div>
-								</form:form>
+									<div class="step-footer">
 
-
-
-									<div id="section-shipping-rate">
-										<div class="section-header">
-											<h2 class="section-title">Phương thức vận chuyển</h2>
-										</div>
-										<div class="section-content">
-
-											<div class="content-box">
-
-												<div class="content-box-row">
-													<div class="radio-wrapper">
-														<label class="radio-label" for="shipping_rate_id_951370">
-															<div class="radio-input">
-																<input id="shipping_rate_id_951370" class="input-radio" type="radio" name="shipping_rate_id" value="951370" checked="">
-															</div>
-															<span class="radio-label-primary">WEB_ĐƠN DƯỚI 299K SHIP 30K/ĐƠN COD.</span>
-															<span class="radio-accessory content-box-emphasis">
-
-																30,000₫
-
-															</span>
-														</label>
-													</div>
-												</div>
-
-												<div class="content-box-row">
-													<div class="radio-wrapper">
-														<label class="radio-label" for="shipping_rate_id_1199384">
-															<div class="radio-input">
-																<input id="shipping_rate_id_1199384" class="input-radio" type="radio" name="shipping_rate_id" value="1199384">
-															</div>
-															<span class="radio-label-primary">FB_IG SHIP TOÀN QUỐC 30K</span>
-															<span class="radio-accessory content-box-emphasis">
-																30,000₫
-															</span>
-														</label>
-													</div>
-												</div>
-
-											</div>
-
-										</div>
-									</div>
-
-									<div id="section-payment-method" class="section">
-										<div class="section-header">
-											<h2 class="section-title">Phương thức thanh toán</h2>
-										</div>
-										<div class="section-content">
-											<div class="content-box">
-
-
-												<div class="radio-wrapper content-box-row">
-													<label class="radio-label" for="payment_method_id_870425">
-														<div class="radio-input">
-															<input id="payment_method_id_870425" class="input-radio" name="payment_method_id" type="radio" value="870425" checked="checked">
-														</div>
-														<span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
-													</label>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="step-footer">
-
-							<form id="form_next_step" accept-charset="UTF-8" method="post">
 								<button type="submit" class="step-footer-continue-btn btn">
 									<span class="btn-content">Hoàn tất đơn hàng</span>
 									<i class="btn-spinner icon icon-button-spinner"></i>
 								</button>
-							</form>
 							<a class="step-footer-previous-link" href="${pageContext.request.contextPath}/cart">
 								<svg class="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg>
 								Giỏ hàng
 							</a>
 
 						</div>
+								</form:form>
+								</div>
+							</div>
+						
 					</div>
 
 				</div>

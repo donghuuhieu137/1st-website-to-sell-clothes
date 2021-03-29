@@ -1250,7 +1250,9 @@ select {
         }
 
             .main .main-header .logo {
-                display: block;
+                    display: flex;
+    justify-content: center;
+    align-items: center;
             }
 
             .main .main-header .breadcrumb {

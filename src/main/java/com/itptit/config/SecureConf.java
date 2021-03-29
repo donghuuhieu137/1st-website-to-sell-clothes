@@ -1,4 +1,4 @@
-package com.itptit.conf;
+package com.itptit.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

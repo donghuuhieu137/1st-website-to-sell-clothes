@@ -46,12 +46,17 @@ public class SaleOrderService {
 	public void save(SaleOrder saleOrder, List<CartProduct> listProducts, Integer total) throws IllegalAccessException, IOException{
 		String code = randomIdentifier(7);
 		saleOrder.setCode(code);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) auth.getPrincipal();
-		int userId = user.getId();
-		saleOrder.setId(userId);
+//		Integer userId = null;
+//		if(User.isLogged()) {
+//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			User user = (User) auth.getPrincipal();
+//			userId = user.getId();
+//			saleOrder.setId(userId);
+//		}
 		saleOrder.setTotal(total);
-		saleOrderProductService.save(listProducts, userId);
+		System.out.println(saleOrder.toString());
 		saleOrderRepo.save(saleOrder);
+		saleOrderProductService.save(listProducts, saleOrder);
+		
 	}
 }

@@ -33,7 +33,7 @@ public class WebConf implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/META-INF/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/META-INF/js/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/META-INF/images/");
-        registry.addResourceHandler("/uploads/**").addResourceLocations("file:D:\\Code\\Java\\Code Java\\eclipse - workspace\\com.itptit.donghuuhieu\\src\\main\\uploads\\");
+        registry.addResourceHandler("/uploads/**").addResourceLocations("file:D:\\Code\\Java\\Code Java\\eclipse - workspace\\shopping-project\\src\\main\\uploads\\");
     }
 
 }

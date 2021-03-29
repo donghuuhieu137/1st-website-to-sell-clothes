@@ -55,12 +55,11 @@ public class AdminCategoryController{
 	}
 	
 	/////////////////// D E L E T E
-	@RequestMapping(value = { "/admin/delete" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/admin/category-delete" }, method = RequestMethod.POST)
 	public ResponseEntity<AjaxResponse> saveWithAjax(final ModelMap model, final HttpServletRequest request, final HttpServletResponse response,
 											@RequestBody Category category) {
 	Category categoryInDB = categoryRepo.getOne(category.getId());
-	categoryInDB.setStatus(true);
-	categoryRepo.save(categoryInDB);
+	categoryRepo.delete(categoryInDB);
 	return ResponseEntity.ok(new AjaxResponse(200, "Thành công"));
 	}
 	

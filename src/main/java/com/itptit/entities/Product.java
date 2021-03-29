@@ -1,5 +1,7 @@
 package com.itptit.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,7 +23,8 @@ public class Product extends com.itptit.entities.BaseEntity {
 	@Column(name = "short_description", length = 3000, nullable = false)
 	private String shortDes;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinTable(name = "tbl_products_color",
 	  joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "color_id"))
 	private Set<com.itptit.entities.ProductColor> color = new HashSet<com.itptit.entities.ProductColor>();
@@ -33,16 +36,21 @@ public class Product extends com.itptit.entities.BaseEntity {
 	@Column(name = "seo", nullable = false)
 	private String seo;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_products_size",
 			  joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "size_id"))
 	private Set<com.itptit.entities.ProductSize> size = new HashSet<com.itptit.entities.ProductSize>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "category_id")
-	private com.itptit.entities.Category category;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "category_id")
+//	private com.itptit.entities.Category category;
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.LAZY)
+	@JoinTable(name = "tbl_category_product",
+			joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> category = new HashSet<Category>();
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product_img", fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product_img", orphanRemoval = true)
 	private List<com.itptit.entities.ProductImages> productImages = new ArrayList<com.itptit.entities.ProductImages>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
@@ -106,12 +114,20 @@ public class Product extends com.itptit.entities.BaseEntity {
 		this.seo = seo;
 	}
 
-	public com.itptit.entities.Category getCategory() {
+	public Set<Category> getCategory() {
 		return category;
 	}
 
-	public void setCategory(com.itptit.entities.Category category) {
+	public void setCategory(Set<Category> category) {
 		this.category = category;
+	}
+
+	public List<SaleOrderProducts> getSaleOrderProducts() {
+		return saleOrderProducts;
+	}
+
+	public void setSaleOrderProducts(List<SaleOrderProducts> saleOrderProducts) {
+		this.saleOrderProducts = saleOrderProducts;
 	}
 
 	public Set<com.itptit.entities.ProductSize> getSize() {

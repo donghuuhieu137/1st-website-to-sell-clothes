@@ -141,6 +141,9 @@ li{
 .list ul li{
 	margin-left: 10px;
 }
+.list-order li{
+		overflow: auto;
+}
 /*product*/
 /*add products*/
 .add-funtion span{

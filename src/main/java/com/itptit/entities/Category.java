@@ -1,8 +1,12 @@
 package com.itptit.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tbl_category")
@@ -10,7 +14,7 @@ public class Category extends com.itptit.entities.BaseEntity {
 	@Column(name = "name", length = 45, nullable = false)
 	private String name;
 	
-	@Column(name = "description", length = 45, nullable = false)
+	@Column(name = "description", length = 45)
 	private String description;
 	
 	@Column(name = "seo",nullable = false)
@@ -18,10 +22,11 @@ public class Category extends com.itptit.entities.BaseEntity {
 
 	@Column(name = "parent_id", nullable = true)
 	private Integer parent_id;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
-	private List<Product> products = new ArrayList<Product>();
-	
+
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "category")
+	private Set<Product> products = new HashSet<Product>();
+
 	public String getName() {
 		return name;
 	}
@@ -53,16 +58,4 @@ public class Category extends com.itptit.entities.BaseEntity {
 	public void setParent_id(Integer parent_id) {
 		this.parent_id = parent_id;
 	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
-	
-	
-	
 }

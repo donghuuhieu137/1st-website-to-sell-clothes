@@ -30,20 +30,22 @@
 				<div class="list">
 					<ul class="list-header">
 						<li class="col-md-2">Username</li>
-						<li class="col-md-2">Password</li>
-						<li class="col-md-2">Email</li>
-						<li class="col-md-3">Adress</li>
-						<li class="col-md-1">Roles</li>
+						<li class="col-md-3">Email</li>
+						<li class="col-md-2">Adress</li>
+						<li class="col-md-2">Roles</li>
 						<li class="col-md-1">Status</li>
-						<li class="col-md-1">Action</li>
+						<li class="col-md-2">Action</li>
 					</ul>
 					<c:forEach items="${accounts}" var = "accounts">
 						<ul class="list-header">
 							<li class="col-md-2">${accounts.userName}</li>
-							<li class="col-md-2">${accounts.password}</li>
-							<li class="col-md-2">${accounts.email}</li>
-							<li class="col-md-3">${accounts.address}</li>
-							<li class="col-md-1">${accounts.roles}</li>
+							<li class="col-md-3">${accounts.email}</li>
+							<li class="col-md-2">${accounts.address}</li>
+							<li class="col-md-2">
+								<c:forEach items="${accounts.roles}" var="role">
+									<span>${role.name}</span>
+								</c:forEach>
+							</li>
 							<li class="col-md-1">${accounts.status}</li>
 							<li class="col-md-1 products-list-color">
 								<ul class="products-list-action">

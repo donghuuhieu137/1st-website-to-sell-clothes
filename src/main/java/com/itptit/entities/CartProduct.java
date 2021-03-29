@@ -1,20 +1,24 @@
 package com.itptit.entities;
 
+
 public class CartProduct {
-	private int id;
+	private int productId;   
 	private String name;
-	private int quality;
+	private int quantity;
 	private Integer price;
 	private String color;
 	private String size;
 	private Integer totalPrice;
 	private String imgPath;
 	
-	public int getId() {
-		return id;
+	
+	
+	
+	public int getProductId() {
+		return productId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public String getName() {
 		return name;
@@ -23,11 +27,12 @@ public class CartProduct {
 		this.name = name;
 	}
 	
-	public int getQuality() {
-		return quality;
+	
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setQuality(int quality) {
-		this.quality = quality;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	public Integer getPrice() {
 		return price;

@@ -25,7 +25,7 @@
 			</div>
 			<div class="cart-product">
 				<c:forEach items="${cart.cartProduct}" var="product">
-					<div class="cart-product-detail" id="cart-product-${product.id}">
+					<div class="cart-product-detail" id="cart-product-${product.productId}">
 						<img src="${pageContext.request.contextPath}/uploads/${product.imgPath}">
 						<div class="cart-product-info">
 							<span class="cart-product-detail-title">
@@ -41,14 +41,14 @@
 							</span>
 							<br>
 							<span>
-								Số lượng: ${product.quality}
+								Số lượng: ${product.quantity}
 							</span>
 							<span class="cart-product-info-sum">
 								${product.totalPrice}₫
 							</span>
 						</div>
 						<div class="cart-product-info2">
-							<button onclick="product.removeFromCart(${product.id})"><i class="fas fa-times"></i></button>
+							<button onclick="product.removeFromCart(${product.productId})"><i class="fas fa-times"></i></button>
 						</div>
 					</div>
 				</c:forEach>

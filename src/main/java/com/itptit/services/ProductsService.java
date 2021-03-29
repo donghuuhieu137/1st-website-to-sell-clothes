@@ -79,7 +79,7 @@ public class ProductsService{
 				
 				// xoá ảnh cũ trên vật lí(host)
 				for(ProductImages _images : oldProductImages) {
-					new File("D:\\Code\\Java\\Code Java\\eclipse - workspace\\com.itptit.donghuuhieu\\src\\main\\uploads\\" + _images.getPath()).delete();
+					new File("D:\\Code\\Java\\Code Java\\eclipse - workspace\\shopping-project\\src\\main\\uploads\\" + _images.getPath()).delete();
 				}
 				
 				// xoá ảnh trên database
@@ -95,7 +95,7 @@ public class ProductsService{
 			for(MultipartFile productImage : productImages) {
 				String rand = randomIdentifier(10);
 				// lưu vật lí
-				productImage.transferTo(new File("D:\\Code\\Java\\Code Java\\eclipse - workspace\\com.itptit.donghuuhieu\\src\\main\\uploads\\" +rand+".jpg"));
+				productImage.transferTo(new File("D:\\Code\\Java\\Code Java\\eclipse - workspace\\shopping-project\\src\\main\\uploads\\" +rand+".jpg"));
 				
 				ProductImages _productImages = new ProductImages();
 				_productImages.setPath(rand+".jpg");
@@ -137,11 +137,12 @@ public class ProductsService{
 //		String jpql = "Select caijcungduoc from Product caijcungduoc";
 //		Query query = entityManager.createQuery(jpql, Product.class);
 
+//		select * from tbl_products inner join tbl_category_product on (tbl_category_product.category_id = 15 and product_id = id)
 		String sql = "select * from tbl_products where 1=1";
-
+		
 		// tìm kiếm theo category ID.
 		if(productSearch != null && productSearch.getCategoryId() != null) {
-			sql = sql + " and category_id=" + productSearch.getCategoryId();
+			sql = "select * from tbl_products inner join tbl_category_product on (tbl_category_product.category_id = "+productSearch. getCategoryId() +" and product_id = id)";
 		} 
 
 		// tìm kiếm theo ID của sản phẩm.
@@ -149,10 +150,10 @@ public class ProductsService{
 			sql = sql + " and id=" + productSearch.getId();
 		}
 		
-//		// tìm kiếm theo seo của category
-//		if(productSearch != null && productSearch.getSeoCategoty() != null) {
-//			sql = sql + " and category_id in (select id from tbl_category where seo='"+productSearch.getSeoCategoty()+"')";
-//		}
+		// tìm kiếm theo tên của product
+		if(productSearch != null && productSearch.getName() != null) {
+			sql = sql + " and title = "+productSearch.getName();
+		}
 //		
 //		// tìm kiếm theo seo của product
 //		if(productSearch != null && productSearch.getSeoProduct() != null) {

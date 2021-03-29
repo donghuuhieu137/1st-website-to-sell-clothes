@@ -14,7 +14,7 @@ var product = {
 				success: function(jsonResult) { // được gọi khi web-service trả về dữ liệu.
 					if(jsonResult.status == 200) {
 						// location.reload();
-						$("#colProductStatus-"+productId).html("<span class=\"badge badge-danger\">Đã xoá</span>");
+						$("#ColProductStatus-"+productId).html("<span class=\"badge badge-danger\">Đã xoá</span>");
 					} else {
 						alert("eror");
 					}
@@ -27,7 +27,7 @@ var product = {
 		
 		addToCart: function(productId, quantity, color, size){
 			var data = {};
-			data["id"] = productId;
+			data["productId"] = productId;
 			data["color"] = color;
 			data["size"] = size;
 			data["quantity"] = quantity;
@@ -74,4 +74,62 @@ var product = {
 			    }
 			});
 		}
+};
+
+var category = {
+	
+	delete: function(categoryId) {
+			var data = {};
+			data["id"] = categoryId;
+			
+			$.ajax({
+				url: "/admin/category-delete",
+				type: "post",
+				contentType: "application/json", // dữ liệu gửi lên web-service có dạng là json.
+				data: JSON.stringify(data), // object json -> string json
+				
+				dataType: "json", // dữ liệu từ web-service trả về là json.
+				success: function(jsonResult) { // được gọi khi web-service trả về dữ liệu.
+					if(jsonResult.status == 200) {
+						// location.reload();
+						$("#ColCategoryStatus-"+categoryId).html("<span class=\"badge badge-danger\">Đã xoá</span>");
+					} else {
+						alert("eror");
+					}
+				},
+				error: function (jqXhr, textStatus, errorMessage) { // error callback 
+			        
+			    }
+			});
+		}
+	
+};
+
+var order = {
+	
+	delete: function(orderId) {
+			var data = {};
+			data["id"] = orderId;
+			
+			$.ajax({
+				url: "/admin/order-delete",
+				type: "post",
+				contentType: "application/json", // dữ liệu gửi lên web-service có dạng là json.
+				data: JSON.stringify(data), // object json -> string json
+				
+				dataType: "json", // dữ liệu từ web-service trả về là json.
+				success: function(jsonResult) { // được gọi khi web-service trả về dữ liệu.
+					if(jsonResult.status == 200) {
+						// location.reload();
+						$("#order-"+orderId).remove();
+					} else {
+						alert("eror");
+					}
+				},
+				error: function (jqXhr, textStatus, errorMessage) { // error callback 
+			        
+			    }
+			});
+		}
+	
 }

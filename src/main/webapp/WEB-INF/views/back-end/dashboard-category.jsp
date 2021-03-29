@@ -45,11 +45,11 @@
 							<li class="col-md-2">${categories.description}</li>
 							<li class="col-md-1">${categories.parent_id}</li>
 							<li class="col-md-2">${categories.seo}</li>
-							<li class="col-md-1">${categories.status}</li>
+							<li class="col-md-1 ColCategoryStatus-${categories.id}">${categories.status}</li>
 							<li class="col-md-3 products-list-color">
 								<ul class="products-list-action">
 									<li class="product-edit"><a href="${pageContext.request.contextPath}/admin/dashboard-category-edit/${categories.id}">Sửa</a></li>
-									<li class="product-delete"><a href="#">Xóa</a></li>
+									<li class="product-delete"><a href=""javascript:void(0)" onclick="category.delete(${categories.id})">Xóa</a></li>
 								</ul>
 							</li>
 						</ul>

@@ -47,19 +47,27 @@ public class CartController extends BaseController{
 	throws Exception{
 		HttpSession session = request.getSession();
 		
+		System.out.println(cartProduct.getQuantity());
+		System.out.println(cartProduct.getName());
+		System.out.println(cartProduct.getPrice());
+		System.out.println(cartProduct.getSize());
+		
+		
 		Cart cart = null;
-		Integer productQuality = 0;
+		Integer productQuantity = 0;
 		Integer totalPrice = 0;
 		
 		if(session.getAttribute("cart") == null) {
 			cart = new Cart();
 			session.setAttribute("cart", cart);
-			session.setAttribute("productQuality", 0);
+			session.setAttribute("productQuantity", 0);
 			session.setAttribute("totalPriceInCart", 0);
 		}
 		else {
 			cart = (Cart) session.getAttribute("cart");
-			productQuality = (Integer) session.getAttribute("productQuality");
+			productQuantity = (Integer) session.getAttribute("productQuantity");
+			System.out.println(productQuantity);
+			System.out.println(totalPrice);
 			totalPrice = (Integer) session.getAttribute("totalPriceInCart");
 		}
 		
@@ -67,15 +75,16 @@ public class CartController extends BaseController{
 		
 		boolean isExist = false;
 
-		Product productInDb = productRepo.getOne(cartProduct.getId());
+		Product productInDb = productRepo.getOne(cartProduct.getProductId());
 
 		for (CartProduct product : productInCart) {
-			if(product.getId() == cartProduct.getId())
+			if(product.getProductId() == cartProduct.getProductId())
 			{
 				isExist = true;
-				product.setQuality(product.getQuality()+cartProduct.getQuality());
-				product.setTotalPrice(product.getQuality()*cartProduct.getPrice());
-				totalPrice = totalPrice + product.getPrice()*cartProduct.getQuality();
+				product.setQuantity(product.getQuantity()+cartProduct.getQuantity());
+				product.setTotalPrice(product.getQuantity()*cartProduct.getPrice());
+				totalPrice = totalPrice + product.getPrice()*cartProduct.getQuantity();
+				System.out.println(totalPrice);
 			}
 		}
 		
@@ -83,14 +92,16 @@ public class CartController extends BaseController{
 			cartProduct.setImgPath(productInDb.getProductImages().get(0).getPath());
 			cartProduct.setName(productInDb.getTitle());     
 			cartProduct.setPrice(productInDb.getPrice());
-			cartProduct.setTotalPrice(cartProduct.getPrice()*cartProduct.getQuality());
-			totalPrice = totalPrice + cartProduct.getPrice()*cartProduct.getQuality();
+			cartProduct.setTotalPrice(cartProduct.getPrice()*cartProduct.getQuantity());
+			totalPrice = totalPrice + cartProduct.getPrice()*cartProduct.getQuantity();
 			productInCart.add(cartProduct);
 		}
-		productQuality = productQuality + cartProduct.getQuality();
-		session.setAttribute("productQuality",productQuality);
+		productQuantity = productQuantity + cartProduct.getQuantity();
+		session.setAttribute("productQuantity",productQuantity);
 		session.setAttribute("totalPriceInCart", totalPrice);
-		return ResponseEntity.ok(new AjaxResponse(200,productQuality));
+		System.out.println(productQuantity);
+		System.out.println(totalPrice);
+		return ResponseEntity.ok(new AjaxResponse(200,productQuantity));
 	}
 	
 	@RequestMapping(value = { "/remove-from-cart" }, method = RequestMethod.POST)
@@ -99,20 +110,20 @@ public class CartController extends BaseController{
 	throws Exception {
 		HttpSession httpSession = request.getSession();
 		Cart cart = (Cart) httpSession.getAttribute("cart");
-		Integer productQuality = (Integer) httpSession.getAttribute("productQuality");
+		Integer productQuantity = (Integer) httpSession.getAttribute("productQuantity");
 		Integer totalPrice = (Integer) httpSession.getAttribute("totalPriceInCart");
 		List<CartProduct> listCardProduct = cart.getCartProduct();
 		for (CartProduct i : listCardProduct) {
-			if(i.getId()==cartProduct.getId()){
-				productQuality -= i.getQuality();
-				totalPrice -= i.getPrice()*i.getQuality();
+			if(i.getProductId()==cartProduct.getProductId()){
+				productQuantity -= i.getQuantity();
+				totalPrice -= i.getPrice()*i.getQuantity();
 				listCardProduct.remove(i);
 				break;
 			}
 		}
-		httpSession.setAttribute("productQuality", productQuality);
+		httpSession.setAttribute("productQuantity", productQuantity);
 		httpSession.setAttribute("totalPriceInCart", totalPrice);
-		return ResponseEntity.ok(new AjaxResponse(200,productQuality));
+		return ResponseEntity.ok(new AjaxResponse(200,productQuantity));
 	}
 	
 	@RequestMapping(value = { "/checkout" }, method = RequestMethod.GET)
@@ -123,15 +134,15 @@ public class CartController extends BaseController{
 	}
 	
 	@RequestMapping(value = { "/checkout" }, method = RequestMethod.POST)
-	public String Order(@ModelAttribute SaleOrder saleOrder,
+	public String Order(@ModelAttribute("saleOrder") SaleOrder saleOrder,
 			final ModelMap model, final HttpServletRequest request)
 	throws Exception {
 		HttpSession httpSession = request.getSession();
 		Cart cart = (Cart) httpSession.getAttribute("cart");
-		Integer totalPrice = (Integer) httpSession.getAttribute("totalPrice");
+		Integer totalPrice = (Integer) httpSession.getAttribute("totalPriceInCart");
 		List<CartProduct> listProducts = cart.getCartProduct();
 		saleOrderService.save(saleOrder, listProducts, totalPrice);
-		return "front-end/checkout?success=true";
+		return "redirect:checkout?success=true";
 	}
 	
 }

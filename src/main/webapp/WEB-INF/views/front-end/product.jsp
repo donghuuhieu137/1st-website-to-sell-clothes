@@ -20,7 +20,7 @@
 		<!-- /header -->
 		<!-- main-body -->
 		<div class="cart-header">
-				<span><a href="/">Trang chủ</a> / <a href="${pageContext.request.contextPath}/collections/${product.category.id}">${product.category.name}</a> / ${product.title}</span>
+				<span><a href="/">Trang chủ</a>  / ${product.title}</span>
 			</div>
 		<div class="row product-detail-wrapper">
 			<div class="col-md-12 col-sm-12 col-xs-12">

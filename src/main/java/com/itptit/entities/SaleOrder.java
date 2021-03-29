@@ -10,7 +10,7 @@ public class SaleOrder extends BaseEntity {
 	@Column(name = "code")
 	private String code;
 
-	@Column(name = "total", nullable = false)
+	@Column(name = "total")
 	private Integer total;
 
 	@Column(name = "customer_name")

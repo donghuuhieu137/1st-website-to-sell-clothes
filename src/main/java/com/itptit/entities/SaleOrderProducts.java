@@ -4,14 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_saleorder_products")
-public class SaleOrderProducts extends com.itptit.entities.BaseEntity {
+public class SaleOrderProducts extends BaseEntity {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
 	private Product productId;
 	
-	@Column(name = "quality")
-	private Integer quality;
+	@Column(name = "quantity")
+	private Integer quantity;
 	
 	@Column(name = "size")
 	private String size;
@@ -19,9 +19,12 @@ public class SaleOrderProducts extends com.itptit.entities.BaseEntity {
 	@Column(name = "color")
 	private String color;
 
+	@Column(name = "total")
+	private Integer total;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "saleorder_id")
-	private com.itptit.entities.SaleOrder saleOrder;
+	private SaleOrder saleOrder;
 
 	public Product getProductId() {
 		return productId;
@@ -31,20 +34,21 @@ public class SaleOrderProducts extends com.itptit.entities.BaseEntity {
 		this.productId = productId;
 	}
 
-	public com.itptit.entities.SaleOrder getSaleOrder() {
+	public SaleOrder getSaleOrder() {
 		return saleOrder;
 	}
 
-	public void setSaleOrder(com.itptit.entities.SaleOrder saleOrder) {
+	public void setSaleOrder(SaleOrder saleOrder) {
 		this.saleOrder = saleOrder;
 	}
+	
 
-	public Integer getQuality() {
-		return quality;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setQuality(Integer quality) {
-		this.quality = quality;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getSize() {
@@ -62,6 +66,16 @@ public class SaleOrderProducts extends com.itptit.entities.BaseEntity {
 	public void setColor(String color) {
 		this.color = color;
 	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	
 
 	
 	
