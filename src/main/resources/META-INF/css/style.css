@@ -617,6 +617,12 @@ footer .footer-content{
 	font-size: 30px;
 	right: 200px;
 }
+.cart-product .cart-product-info2 button{
+	border-width: 0px;
+    background: white;
+    margin-bottom: 50px;
+    
+}
 .cart-product-info-sum{
 	font-size: 16px;
 	position: absolute;

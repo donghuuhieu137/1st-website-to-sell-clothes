@@ -53,7 +53,7 @@ var product = {
 		
 		removeFromCart: function(productId){
 			var data = {};
-			data["id"] = productId;
+			data["productId"] = productId;
 			
 			$.ajax({
 				url: "/remove-from-cart",

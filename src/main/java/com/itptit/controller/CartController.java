@@ -114,6 +114,9 @@ public class CartController extends BaseController{
 		Integer totalPrice = (Integer) httpSession.getAttribute("totalPriceInCart");
 		List<CartProduct> listCardProduct = cart.getCartProduct();
 		for (CartProduct i : listCardProduct) {
+			System.out.println(i.getName());
+			System.out.println(i.getProductId());
+			System.out.println(cartProduct.getProductId());
 			if(i.getProductId()==cartProduct.getProductId()){
 				productQuantity -= i.getQuantity();
 				totalPrice -= i.getPrice()*i.getQuantity();

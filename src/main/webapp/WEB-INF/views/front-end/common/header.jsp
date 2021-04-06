@@ -16,7 +16,7 @@
 					<a href="${pageContext.request.contextPath}/login" title="Tài khoản"><span><i class="fas fa-user-circle"></i></span></a>
 					<a href="${pageContext.request.contextPath}/cart" title="Giỏ hàng">
 						<span><i class="fas fa-shopping-cart"></i></span>
-						<span id="cart-product-quantity">${productQuality}</span>
+						<span id="cart-product-quantity">${productQuantity}</span>
 					</a>
 				</div>
 			</div>
