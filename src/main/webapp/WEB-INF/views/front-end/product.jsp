@@ -33,7 +33,7 @@
 									
 									<c:forEach items="${product.productImages}" var="img">
 										<li class="product-gallery-item gallery-item current">
-											<img class="product-image-feature" src="${pageContext.request.contextPath}/uploads/${img.path}">
+											<img class="product-image-feature" src="${img.path}">
 										</li>
 									</c:forEach>
 									

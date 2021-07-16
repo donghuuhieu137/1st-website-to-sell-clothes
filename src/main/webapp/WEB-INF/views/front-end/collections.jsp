@@ -71,7 +71,7 @@
 						<c:choose>
 							<c:when test="${product.status==true}">
 								<div class="col-sm-3 col-md-3 collections-img info-product">
-								<div><a href="${pageContext.request.contextPath}/product/${product.id}"><img src="${pageContext.request.contextPath}/uploads/${product.productImages.get(0).path}"></a></div>
+								<div><a href="${pageContext.request.contextPath}/product/${product.id}"><img src="${product.productImages.get(0).path}"></a></div>
 								<div class="detail-product">
 									<div class="product-name">
 										<a href="${pageContext.request.contextPath}/product/${product.id}">${product.title}</a>
