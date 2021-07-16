@@ -1,5 +1,9 @@
 FROM maven:latest
 
+RUN mkdir /test-docker
+
+WORKDIR /test-docker
+
 COPY . .
 
 EXPOSE 8080

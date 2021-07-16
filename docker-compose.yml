@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mysqld:
+    image: mysql:5.7
+    container_name: mysqld
+    environment:
+      - MYSQL_ROOT_PASSWORD=dhh13072001
+      - MYSQL_DATABASE=donghuuhieu
+      - MYSQL_USER=hieulailaptrinh
+      - MYSQL_PASSWORD=dhh13072001
+    volumes:
+      - ./docker/database:/var/lib/mysql
+  app:
+    build: .
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - mysqld
+    volumes:
+      - .:/test-docker
