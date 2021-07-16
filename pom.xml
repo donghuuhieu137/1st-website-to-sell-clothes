@@ -118,4 +118,21 @@
         </dependency>
 
     </dependencies>
+<build>
+    <plugins>
+
+		<!-- mvn clean compile assembly:single -->
+		<plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <configuration>
+                <mainClass>com.itptit.WebServerStarter</mainClass>
+            </configuration>
+        </plugin>
+
+
+		</plugins>
+    <finalName>donghuuhieu</finalName>
+  </build>
 </project>
