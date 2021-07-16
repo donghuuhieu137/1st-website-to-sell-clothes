@@ -120,9 +120,7 @@
     </dependencies>
 <build>
     <plugins>
-
-		<!-- mvn clean compile assembly:single -->
-		<plugin>
+        <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>1.2.1</version>
@@ -130,9 +128,6 @@
                 <mainClass>com.itptit.WebServerStarter</mainClass>
             </configuration>
         </plugin>
-
-
-		</plugins>
-    <finalName>donghuuhieu</finalName>
-  </build>
+    </plugins>
+</build>
 </project>
